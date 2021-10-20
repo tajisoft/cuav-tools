@@ -16,35 +16,6 @@ if not os.path.exists(targetDir):
     print('Not found %s' % targetDir)
     sys.exit()
 
-def to_deg(value, loc):                                                                                                                                               
-    if value < 0:                                                                                                                                                    
-       loc_value = loc[0]                                                                                                                                       
-    elif value > 0:                                                                                                                                                  
-       loc_value = loc[1]
-    else:                                                                                                                                                            
-       loc_value = ""                                                                                                                                           
-    abs_value = abs(value)
-    deg =  int(abs_value)                                                                                                                                        
-    t1 = (abs_value-deg)*60                                                                                                                                      
-    minu = int(t1)                                                                                                                                                
-    sec = round((t1 - minu)* 60, 5)
-    return (deg, minu, sec, loc_value) 
-
-def change_to_rational(number):
-    f = Fraction(str(number))                                                                                                                                    
-    return (f.numerator, f.denominator)    
-
-def find_all_files(directory):
-    for root, dirs, files in os.walk(directory):
-        yield root
-        for file in files:
-            yield os.path.join(root, file)
-
-lat, lng = 35.0000000, 139.0000000
-lat_deg = to_deg(lat, ['S', 'N'])
-lng_deg = to_deg(lng, ['W', 'E'])
-exif_lat = (change_to_rational(lat_deg[0]), change_to_rational(lat_deg[1]), change_to_rational(lat_deg[2]))
-exif_lng = (change_to_rational(lng_deg[0]), change_to_rational(lng_deg[1]), change_to_rational(lng_deg[2]))
 for f in find_all_files(targetDir):
     if 'jpg' in f:
         img = Image.open(f)
