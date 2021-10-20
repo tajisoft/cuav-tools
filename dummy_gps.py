@@ -6,8 +6,7 @@ from pprint import pprint
 
 import piexif
 from PIL import Image
-from fractions import Fraction
-import pyexiv2
+# import pyexiv2
 
 targetDir = sys.argv[1]
 print('target dir %s' % targetDir)
