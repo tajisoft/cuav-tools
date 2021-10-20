@@ -15,6 +15,12 @@ if not os.path.exists(targetDir):
     print('Not found %s' % targetDir)
     sys.exit()
 
+def find_all_files(directory):
+    for root, dirs, files in os.walk(directory):
+        yield root
+        for file in files:
+            yield os.path.join(root, file)
+
 for f in find_all_files(targetDir):
     if 'jpg' in f:
         img = Image.open(f)
